@@ -1,15 +1,15 @@
 import React from 'react';
 import { Routes, Route, Link, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useBank } from './context/BankContext';
-import { 
-  LayoutDashboard, 
-  History, 
-  Send, 
-  User, 
-  CreditCard, 
-  LogOut, 
-  ShieldAlert, 
-  Building 
+import {
+  LayoutDashboard,
+  History,
+  Send,
+  User,
+  CreditCard,
+  LogOut,
+  ShieldAlert,
+  Building
 } from 'lucide-react';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -17,7 +17,7 @@ import Transactions from './pages/Transactions';
 import Transfer from './pages/Transfer';
 import Profile from './pages/Profile';
 import Cards from './pages/Cards';
-
+import Admin from "./pages/Admin";
 export default function App() {
   const { isLoggedIn, handleLogout, timeLeft } = useBank();
   const navigate = useNavigate();
@@ -38,14 +38,14 @@ export default function App() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      
+
       {/* Top Banner (Always Visible to Warn Users) */}
-      <div style={{ 
-        background: 'linear-gradient(90deg, #f59e0b 0%, #d97706 100%)', 
-        color: '#0b0f19', 
-        fontSize: '0.8rem', 
-        fontWeight: 'bold', 
-        textAlign: 'center', 
+      <div style={{
+        background: 'linear-gradient(90deg, #f59e0b 0%, #d97706 100%)',
+        color: '#0b0f19',
+        fontSize: '0.8rem',
+        fontWeight: 'bold',
+        textAlign: 'center',
         padding: '6px 12px',
         letterSpacing: '0.03em',
         boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
@@ -110,47 +110,46 @@ export default function App() {
       <main className="main-container" style={{ flexGrow: 1 }}>
         <Routes>
           <Route path="/login" element={isLoggedIn ? <Navigate to="/dashboard" replace /> : <Login />} />
-          
+
           <Route path="/dashboard" element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
           } />
-          
+
           <Route path="/transactions" element={
             <ProtectedRoute>
               <Transactions />
             </ProtectedRoute>
           } />
-          
+
           <Route path="/transfer" element={
             <ProtectedRoute>
               <Transfer />
             </ProtectedRoute>
           } />
-          
+
           <Route path="/profile" element={
             <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           } />
-          
           <Route path="/cards" element={
             <ProtectedRoute>
               <Cards />
             </ProtectedRoute>
           } />
-
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} replace />} />
         </Routes>
       </main>
 
       {/* Portal Footer */}
-      <footer style={{ 
-        borderTop: '1px solid var(--border-color)', 
-        padding: '24px', 
-        textAlign: 'center', 
-        fontSize: '0.78rem', 
+      <footer style={{
+        borderTop: '1px solid var(--border-color)',
+        padding: '24px',
+        textAlign: 'center',
+        fontSize: '0.78rem',
         color: 'var(--text-muted)',
         marginTop: '3rem',
         background: 'rgba(11, 15, 25, 0.4)'
