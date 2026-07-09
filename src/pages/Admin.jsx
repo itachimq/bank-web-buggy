@@ -7,7 +7,7 @@ export default function Admin() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        await fetch("https://main-project-i4yq.onrender.com/api/honeypot/log", {
+        await fetch("https://main-project-i4yq.onrender.com/api/honeypot/log", {.
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
